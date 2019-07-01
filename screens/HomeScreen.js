@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { StyleSheet, ScrollView, View, Text, StatusBar, TouchableOpacity } from 'react-native'
 import Constants from 'expo-constants'
 import { connect } from 'react-redux'
@@ -13,7 +13,7 @@ function CardsStatusBar({ backgroundColor, ...props }) {
     </View>
   )
 }
-class HomeScreen extends Component {
+class HomeScreen extends PureComponent {
   componentDidMount() {
     const { dispatch } = this.props
 
@@ -30,14 +30,14 @@ class HomeScreen extends Component {
         <View style={styles.container}>
           <CardsStatusBar backgroundColor={Colors.black} barStyle="light-content" />
           <View style={styles.header}>
-            <Text style={{ fontSize: 22, color: Colors.black }}>Flash Cards Mobile</Text>
+            <Text style={styles.appTitle}>Flash Cards Mobile</Text>
           </View>
           {Object.keys(this.props.entries).map((entry) => {
             return (<View style={styles.item} key={entry}>
               <TouchableOpacity
                 onPress={() => navigate('Deck', { key: entry })}>
-                <Text style={{ color: Colors.black, fontSize: 22, textAlign: 'center' }}>{entry}</Text>
-                <Text style={{ color: Colors.gray, fontSize: 14, textAlign: 'center', paddingTop: 5 }}>{this.props.entries[entry].questions.length} cards</Text>
+                <Text style={styles.titleDeck}>{entry}</Text>
+                <Text style={styles.cards}>{this.props.entries[entry].questions.length} cards</Text>
               </TouchableOpacity>
             </View>)
           })}
@@ -64,6 +64,21 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     marginTop: 10,
+  },
+  appTitle : {
+    fontSize: 22, 
+    color: Colors.black 
+  },
+  titleDeck : { 
+    fontSize: 22,
+    color: Colors.black,
+    textAlign: 'center', 
+  },
+  cards: {
+    color: Colors.gray, 
+    fontSize: 14, 
+    textAlign: 'center', 
+    paddingTop: 5,
   },
   item: {
     flex: 1,

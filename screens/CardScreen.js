@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { View, StyleSheet, Button, Text, TouchableOpacity, Alert } from 'react-native'
+import React, { PureComponent } from 'react'
+import { View, StyleSheet, Button, Text, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import Colors from '../constants/Colors';
 import { clearLocalNotification, setLocalNotification } from '../utils'
 
-class CardScreen extends Component {
+class CardScreen extends PureComponent {
   state = {
     currentQuestion: 1,
     correctAnswer: 0,
@@ -41,6 +41,17 @@ class CardScreen extends Component {
     })
     this.nextQuestion()
   }
+  restartQuiz = () => {
+    this.setState({
+      currentQuestion: 1,
+      correctAnswer: 0,
+      showAnswer: false,
+      showResult: false,
+    })
+  }
+  backDeck = () => {
+    this.props.navigation.goBack()
+  }
   render() {
     const { deck } = this.props
     const questions = Object.entries(deck.questions)
@@ -52,11 +63,27 @@ class CardScreen extends Component {
             <Text style={{ fontSize: 16, textAlign: "center" }}>Incorrect Answer: {deck.questions.length - this.state.correctAnswer} </Text>
             <Text style={{ fontSize: 16, textAlign: "center" }}>Result: {((this.state.correctAnswer * 100) / deck.questions.length).toFixed(2)} % </Text>
           </View>
-
+          <View style={styles.question}>
+              <View style={styles.btn}>
+                <Button
+                  style={{ margin: 20 }}
+                  title="Restart Quiz"
+                  onPress={this.restartQuiz}
+                />
+              </View>
+              <View style={styles.btn}>
+                <Button
+                  style={{ margin: 20 }}
+                  title="Backt to Deck"
+                  onPress={this.backDeck}
+                />
+              </View>
+            </View>
         </View>
         :
         !this.state.showAnswer
-          ? <View style={styles.container}>
+          ?
+          <View style={styles.container}>
             <Text style={{ fontSize: 16, textAlign: "center" }}>{this.state.currentQuestion} / {deck.questions.length}</Text>
             <View style={styles.question}>
               <Text style={{ fontSize: 32, textAlign: "center" }}>{questions[this.state.currentQuestion - 1][1].question}?</Text>
@@ -65,7 +92,8 @@ class CardScreen extends Component {
               </TouchableOpacity>
             </View>
           </View>
-          : <View style={styles.container}>
+          :
+          <View style={styles.container}>
             <Text style={{ fontSize: 16, textAlign: "center" }}>{this.state.currentQuestion} / {deck.questions.length}</Text>
             <View style={styles.question}>
               <Text style={{ fontSize: 32, textAlign: "center" }}>{questions[this.state.currentQuestion - 1][1].answer}</Text>

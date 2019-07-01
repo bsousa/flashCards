@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import { View, StyleSheet, Text, TextInput, Button } from 'react-native'
+import React, { PureComponent } from 'react'
+import { View, StyleSheet, TextInput, Button } from 'react-native'
 import { connect } from 'react-redux'
 import { addEntry } from '../actions/'
 import { submitEntry } from '../api'
 import { getMetaInfo } from '../utils'
 
-class AddDeckScreen extends Component {
+class AddDeckScreen extends PureComponent {
   static navigationOptions = {
     title: 'New Deck',
   }
@@ -25,12 +25,10 @@ class AddDeckScreen extends Component {
 
     this.setState({ title: '' })
 
-    this.toHome()
-  }
-  toHome = () => {
     const { navigate } = this.props.navigation
-    navigate('Home')
+    navigate('Deck', { key: key })
   }
+
   render() {
     return (
       <View style={styles.container}>

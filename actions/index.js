@@ -5,21 +5,20 @@ export const ADD_CARD = 'ADD_CARD'
 export function receiveEntries (entries) { 
   return {
     type: RECEIVE_ENTRIES,
-    entries,
+    payload: { entries },
   }
 }
 
 export function addEntry (entry) {
   return {
     type: ADD_ENTRY,
-    entry,
+    payload: { entry },
   }
 }
 
 export function addCard (key, card) {
   return {
     type: ADD_CARD,
-    key,
-    card,
+    payload : { key, card },
   }
 }

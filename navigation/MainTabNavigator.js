@@ -1,4 +1,3 @@
-import React from 'react'
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation'
 
 import HomeScreen from '../screens/HomeScreen'
@@ -17,7 +16,7 @@ const HomeStack = createStackNavigator(
 )
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Decks',
+  tabBarLabel: 'Decks'
 }
 
 HomeStack.path = ''

@@ -1,6 +1,6 @@
 import { AsyncStorage } from 'react-native'
 
-const STORAGE_KEY = 'flashCards:decks-storage'
+const STORAGE_KEY = 'flashCards:deck-storage'
 
 export function fetchDecksResults() {
   return AsyncStorage.getItem(STORAGE_KEY).then(formatCalendarResults)

@@ -5,17 +5,17 @@ function entries(state = {}, action) {
     case RECEIVE_ENTRIES:
       return {
         ...state,
-        ...action.entries,
+        ...action.payload.entries,
       }
     case ADD_ENTRY:
       return {
         ...state,
-        ...action.entry
+        ...action.payload.entry
       }
     case ADD_CARD:
       return {
         ...state,
-        ...state[action.key].questions.push(action.card)
+        ...state[action.payload.key].questions.push(action.payload.card)
       }
     default:
       return state

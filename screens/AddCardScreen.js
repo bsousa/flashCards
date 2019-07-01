@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { View, StyleSheet, TextInput, Button } from 'react-native'
 import { connect } from 'react-redux'
 import { addCard } from '../actions'
 import { submitCard } from '../api'
 
-class AddCardScreen extends Component {
+class AddCardScreen extends PureComponent {
   state = {
     question: '',
     answer: '',
